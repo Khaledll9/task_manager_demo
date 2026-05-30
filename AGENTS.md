@@ -4,6 +4,8 @@
 
 Angular 18 standalone app (no NgModules). Bootstrap via `bootstrapApplication(AppComponent)` in `src/main.ts`. Builder: `@angular-devkit/build-angular:application` (esbuild-based). Tests: Jasmine + Karma.
 
+DI: both `inject()` and constructor injection used interchangeably.
+
 ## Commands
 
 | Command | What it does |
@@ -32,7 +34,15 @@ src/
   styles.css           -- global styles
   app/
     app.component.ts   -- root standalone component
-  assets/
+    header/            -- app-header (static shell)
+    user/              -- app-user (Input/Output, User model)
+    tasks/             -- app-tasks (container), task/, new-task/ subdirs
+      task/            -- app-task (Task model, NewTaskData)
+      new-task/        -- app-new-task (form, ngModel, FormsModule)
+      tasks.service.ts -- providedIn: 'root', localStorage-backed
+    shared/
+      card/            -- app-card (generic wrapper component)
+  assets/users/        -- avatar images
 ```
 
 ## Known quirks
@@ -41,3 +51,4 @@ src/
 - Output path: `dist/essentials`
 - No router configured yet (no `RouterOutlet` or routes)
 - `/.angular/cache` gitignored (can delete to clear cache)
+- Indentation inconsistent across files (some 2-space, some 4-space despite `.editorconfig` saying 2 spaces)
